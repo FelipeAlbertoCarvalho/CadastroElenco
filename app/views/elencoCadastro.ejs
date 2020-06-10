@@ -1,0 +1,411 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+
+		<title>Cadastro Elenco</title>
+		
+		<!-- bootstrap - link cdn -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	
+		<!-- incluindo css -->
+		<link href="css/style.css" rel="stylesheet">
+		
+	</head>
+
+
+	<body class="body-index">
+		<input type="hidden" id="atualizar" class="escondido" value="<%=atualizar%>">
+		
+		
+		<% console.log("sup"+suspenso[0][1]);
+		if(suspenso.length < 0 ) {
+			
+		} 
+		else { 
+			var chaves = Object.keys(suspenso);
+			console.log("chaves - "+chaves);
+			chaves.forEach(function(chave){ %>
+				<div class="objeto" name="<%=chave%>">
+		<%		var indices = Object.keys(suspenso[chave]);
+				indices.forEach(function(indice){ console.log("indice"+indice) %>
+					<input type="hidden" name="<%=indice%>" id="suspenso_<%=indice%>" class="escondido" value="<%=suspenso[chave][indice]%>">
+		<%			});		%>
+				</div>
+		<%		});
+			}
+		%>
+		
+		<nav class="navbar navbar-default navbar-static-top">
+			<div class="container">
+				<form class="form-inline form-entrar">
+					<div class="form-group">
+						<button type="button" class="btn btn-info pull-right" id="btn_sair">Sair</button>
+					</div>
+				</form>
+			</div>
+			
+		</nav>
+
+	    <div class="container">
+
+            <div>
+                <h2><%=nome%></h2>
+            </div>
+
+				<% 
+					
+						//console.log("atayalizar = " + atualizar);
+					
+					if(validacao.length > 0) { %>
+					
+					<div class="alert alert-danger">
+						<strong>Atenção</strong>
+						<ul>
+							<% for(var i=0; i < validacao.length; i++) { %>
+								<li><%= validacao[i].msg %></li>
+							<%}%>
+						</ul>
+					</div>
+				<%}%>
+				<%
+				/*	
+				*	var chavePropriedade = Object.keys(dadosForm);		
+				*	chavePropriedade.forEach(function(chave){
+				*		var itemsPrimeiraChave = Object.keys(dadosForm[chavePropriedade]);	
+				*		itemsPrimeiraChave.forEach(function(indice){
+				*			var valor = dadosForm[chave][indice];
+				*			console.log(chave+" : "+indice+" = "+ valor);
+				*		});
+				*
+				*	});
+				*		
+				*/
+
+					var qtde_atletas = 20;
+					var j=10;
+					var keys = Object.keys(dadosForm[0]);		//tá pegando os indices
+					
+
+					var ind = 0;		// o 0 é id
+				%>
+				
+			<form class="form-cadastro" id="formulario" action="" method="POST">
+				<input type="hidden" id="email" name="email" class="escondido" value="<%=email%>">
+				<input type="hidden" name="_id" id="_id" value="<%=dadosForm[0][keys[ind]]%>">
+				<%ind++;%>
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="equipe" class="col-sm-12 col-form-label">Nome do Time</label>
+							<input type="text" value="<%=dadosForm[0][keys[ind]]%>" name="equipe" id="equipe" class="form-control" placeholder="Digite o nome do time"  required="true">
+						</div>
+					</div>
+					<%ind++;%>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="responsavel" class="col-sm-12 col-form-label">Nome do Responsável</label>
+							<input type="text" onchange="atualizarNome(this)" value="<%=dadosForm[0][keys[ind]]%>" name="responsavel" id="responsavel" class="form-control" placeholder="Digite o nome do Responsável pelo time"  required="true">
+						</div>
+					</div>
+					<%ind++;%>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="rg_responsavel" class="col-sm-12 col-form-label">RG do Responsável</label>
+							<input type="text" onchange="atualizarRg(this)" value="<%=dadosForm[0][keys[ind]]%>" name="rg_responsavel" id="rg_responsavel"  class="form-control rg" required="true" placeholder="XX.XXX.XXX-X">
+						</div>
+					</div>
+				</div>
+                <%ind++;%>
+                <div class="row">
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="presidente" class="col-sm-12 col-form-label">Nome do Presidente</label>
+							<input type="text" onchange="atualizarNome(this)" value="<%=dadosForm[0][keys[ind]]%>" name="presidente" id="presidente" class="form-control" placeholder="Digite o nome do Presidente"  required="true">
+						</div>
+					</div>
+					<%ind++;%>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="rg_presidente" class="col-sm-12 col-form-label">RG do Presidente</label>
+							<input type="text" onchange="atualizarRg(this)" value="<%=dadosForm[0][keys[ind]]%>" name="rg_presidente" id="rg_presidente"  class="form-control rg" required="true" placeholder="XX.XXX.XXX-X">
+						</div>
+					</div>
+				</div>
+				<%ind++;%>
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="tecnico" class="col-sm-12 col-form-label">Nome do Técnico</label>
+							<input type="text" onchange="atualizarNome(this)" value="<%=dadosForm[0][keys[ind]]%>" name="tecnico" id="tecnico" class="form-control" placeholder="Digite o nome do Técnico">
+						</div>
+					</div>
+					<%ind++;%>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="rg_tecnico" class="col-sm-12 col-form-label">RG do Técnico</label>
+							<input type="text" onchange="atualizarRg(this)" value="<%=dadosForm[0][keys[ind]]%>" name="rg_tecnico" id="rg_tecnico"  class="form-control rg" placeholder="XX.XXX.XXX-X">
+						</div>
+					</div>
+				</div>
+				<%ind++;%>
+				<div class="row">
+                    <div class="col-sm-4">
+						<div class="form-group">
+							<label for="auxiliar" class="col-sm-12 col-form-label">Nome do Auxiliar Técnico</label>
+							<input type="text" onchange="atualizarNome(this)" value="<%=dadosForm[0][keys[ind]]%>" name="auxiliar" id="auxiliar" class="form-control" placeholder="Digite o nome do Auxiliar" >
+						</div>
+					</div>
+					<%ind++;%>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="rg_auxiliar" class="col-sm-12 col-form-label">RG do Auxiliar Técnico</label>
+							<input type="text" onchange="atualizarRg(this)" value="<%=dadosForm[0][keys[ind]]%>" name="rg_auxiliar" id="rg_auxiliar" class="form-control rg" class="form-control" placeholder="XX.XXX.XXX-X">
+						</div>
+					</div>
+				</div>
+				<%ind++;%>
+                <!-- fazer um for para a questao de quantidade de atletas a serem cadastrados -->
+				<div class="row col-md-12"> <center><h1> Cadastro dos atletas </h1></center>  </div>
+				<%
+					
+					for(var i=1; i <= qtde_atletas; i++){
+						
+				%>
+				<div class="form-group row col-sm-12">
+					
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="atleta<%=i%>" class="col-sm-12 col-form-label">Nome do <%=i%>° Atleta </label>
+							<input type="text" onchange="atualizarNome(this)" value="<%=dadosForm[0][keys[ind]]%>" name="atleta<%=i%>" id="atleta<%=i%>" class="form-control" placeholder="Digite o nome do Atleta">
+							<%ind++;%>
+						</div>
+					</div>
+				
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="atleta<%=i%>" class="col-sm-12 col-form-label">RG do <%=i%>° Atleta </label>
+							<input type="text" onchange="atualizarRg(this)" value="<%=dadosForm[0][keys[ind]]%>" name="rg_atleta<%=i%>" id="atleta<%=i%>" class="form-control rg" placeholder="XX.XXX.XXX-X">
+							<%ind++;%>					
+						</div>
+					</div>
+
+        			<div class="col-sm-4">
+						<label class="col-form-label"> <%=i%>° Atleta é Goleiro? </label>
+						<% if(dadosForm[0][keys[ind]] == '0') { %>
+							<div class="radio">
+								<label><input type="radio" name="goleiro<%=i%>" id="goleiro<%=i%>" value="1">Sim</label>
+								<label><input type="radio" name="goleiro<%=i%>" id="goleiro<%=i%>" value="0" checked>Não</label>
+							</div>
+						<%} else if(dadosForm[0][keys[ind]] == '1') { %>
+							<div class="radio">
+								<label><input type="radio" name="goleiro<%=i%>" id="goleiro<%=i%>" value="1" checked>Sim</label>
+								<label><input type="radio" name="goleiro<%=i%>" id="goleiro<%=i%>" value="0" >Não</label>
+							</div>
+						<%} else { %>
+							<div class="radio">
+								<label><input type="radio" name="goleiro<%=i%>" id="goleiro<%=i%>" value="1">Sim</label>
+								<label><input type="radio" name="goleiro<%=i%>" id="goleiro<%=i%>" value="0">Não</label>
+							</div>
+						<%} %>
+						<%ind++;%>
+        			</div>
+				</div>
+					<%}%>
+					<div class="form-group row col-md-12 ">
+						<center>
+							<button type="submit" id="btn_cadastrar_atualizar" class="btn btn-primary col-md-8" title=""></button>
+						</center>
+					</div>
+				
+
+			</form>
+					
+	    </div>	
+		
+
+		<!-- JQuery -->
+		<script src="js/jquery-2.2.1.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+
+		
+
+		<script type="text/javascript">
+
+			//tentar pegar array pelo session
+			//ver se devo criar variavel aqui ou dentro do ready
+			var rg_name_modificados = [[]];
+			var nome_name_modificados = [[]];
+			var chaveRg = 0;
+			var indexRg = 0;
+			var chaveNome = 0;
+			var indexNome = 0;
+			var suspensos;
+			//pego todos e deixo eles aqui ou so o rg? pego todos eles
+			//s eue pegar todos pela classe vai me retornar o que ? um array
+			//onde a sequencia vai ser ?
+			//eu posso passar tambem no name eu poasso o id e o nome da propriedade
+			//classe 0 1 e 2 , parseInt(field)
+			
+			var suspensosArray = [];
+			var arrayDiv = Array.from(document.getElementsByClassName("objeto"));		//retorna 3 certo?
+			console.log(arrayDiv[0].childElementCount);
+			// 0 é a chave. children é os input
+			for( var i=0; i<arrayDiv.length; i++){
+				for( var j=0; j<arrayDiv[i].childElementCount; j++){
+					var valor = arrayDiv[i].children[j].value;
+					var propriedade = arrayDiv[i].children[j].name;
+					suspensosArray.push([propriedade,valor]);
+				}
+			}
+			
+			
+
+			$(document).ready(function(){
+				
+				$('.rg').mask('00.000.000-0', {reverse: false});
+
+				var atualizar = document.getElementById('atualizar').value;
+				var id = document.getElementById('_id').value;
+				
+				if(atualizar == 1){
+					document.getElementById('formulario').action = "/elencoAtualizar";
+					$('button#btn_cadastrar_atualizar').text("Atualizar").attr({
+						title:"atualizar"
+					});
+				} else {
+					document.getElementById('formulario').action = "/elencoCadastrar";
+					$('button#btn_cadastrar_atualizar').text("Cadastrar").attr({
+						title:"cadastrar"
+					});
+				}
+
+				$('#btn_sair').on('click', function(){
+					window.location.href = '/sair';
+				})
+				//testar aqui com variaveis no .rg
+				//preciso de um s pra validacao do rg
+				//e outro para update no banco de dados, que vou ter que ver quais
+				//foram atualizados
+				
+
+			});
+
+			function validacaoRg(elem){ //elem.value elem.name etc
+				//o que vou fazer aqui ? quero ver se o que ele digitou
+				//o rg que digitou esta no suspenso
+				//eu vou ter aqui os suspensos? eu preciso ter eles aqui para comparar
+				//posso pegar com o hidden, pegar um array hidden
+				//tenho que ver se nao vai ser a primeira vez que ele esta cadastrando
+				//o nome eu vou precisar para saber qual dado esta sendo atualizado
+				//para poder atualizar depois ele tambem
+				//mas vai faltar caso ele atualize o nome tambem 
+				//o suspenso vai ser um array de objetos
+				//for each entao
+				var rg_digitado = elem.value;
+				var rg_name = elem.name;	//trocar o rg pelo atleta? e quando nao for atleta?
+				var liberado = true;
+
+
+				var chaves = Object.keys(suspensosArray);
+				
+				chaves.forEach(function(chave){
+					var indices = Object.keys(suspensosArray[chave]); //eu tirei o chaves
+					
+					indices.forEach(function(indice){	//if(indice == 'rg')
+
+						if(rg_digitado == suspensosArray[chave][indice]){	//percorre todos os indices porém é apenas um indice para ser validado certo? apenas o do rg, vai fazer comparacao qeu serão erradas
+							alert("Cadastre outro porque esse filho da puta nao pode jogar");
+							elem.value = '';
+							liberado = false;
+							return liberado;		//estou usando aqui na parte de atializacao
+						}
+					});
+					//ver se é sequencial e retorna true
+					return liberado;
+				});
+				/*
+					* faço a validacao primeiro
+						if(value == 'fe'){ alert("este usaurio nao pode jogar");
+						el.value = '';}
+					
+				*/
+
+
+	//					if(atualizar == 1){
+				//vou pegar quem foi modificado pela atualizacao
+	//						rg_name_modificados[chave][index] = elem.name;  	//propr bd
+	//						index++;
+	//						rg_name_modificados[chave][index] = elem.value;		//dado
+	//						index++; chave++;
+	//					}
+
+			}
+
+			function atualizarRg(elem){
+				if(atualizar == 1){		//se esttiver atualizando dados
+					
+					var liberado = validacaoRg(elem);	//chama para ver se pode colocar
+					if(liberado){		//se puder sucesso, vou tentar pegar si por aqui e eliminar essa atalizacao por qeu dai eu nao preciso ver se é a tualizacao aqui, e dai eu so cadastro quem estiver aqui certo ?
+						//o proximo passo é passar esses dados para algum lugar ( ou o body ou outra ágina) para serem cadastrados no banco de dados, tenho qeu passar para o body e como eu passo ? eu consigo acessar ariavel criadas aqui no <%%> ou se eu consguir criar req.session.array
+					//vou pegar quem foi modificado pela atualizacao
+						rg_name_modificados[chave][index] = elem.name;  	//propr bd
+						index++;
+						rg_name_modificados[chave][index] = elem.value;		//dado
+						index++; chave++;
+					}
+				} else {	//nao é atualizacao e sim cadastro, tem qeu passar pela validacao aqui
+					if(validacaoRg(elem)){		//ta liberado
+						//nao faz nada
+						//
+					} else {
+						//se nao tiver apto dai eu posso mostrar uma msg aqui, um alert e
+						//excluir o que foi inscrito
+					}
+				}
+			}
+
+			function atualizarNome(elem){	//o problema aqui é que sempre vai salvar o nome né, sendo que depende do rg o nome, mas caso ele troque o nome e depois coloque o rg, vai dar erro lá mas o nome ja foi cadastrado na matriz e dai como fazer? eu poderia faze rum jeito de percorrer, ou ele simplesmente vai faazer na hora do banco de dados dois updates, e vai ficar o update por ultimo
+				if(atualizar == 1){		//se esttiver atualizando dados
+					//var liberado = validacaoRg(elem);	//chama para ver se pode colocar
+					//if(liberado){		//se puder sucesso
+					//vou pegar quem foi modificado pela atualizacao
+						rg_name_modificados[chave][index] = elem.name;  	//propr bd
+						index++;
+						rg_name_modificados[chave][index] = elem.value;		//dado
+						index++; chave++;
+					//}
+				} else {	//nao é atualizacao e sim cadastro
+					//vai executar alguma coisa? tem que validar alguma coisa? nao
+				}
+			}
+
+			function atualizarBd(){		//salvar no bd rg_name_modificados, guarda o name que é a propriedade e o valor do rg
+				//o qeu vou precisar ?
+				//eu usando esse atualizar bd eu posso apenas usar estes dados { mas dai eu vou ter duas onchange dentro do rg}
+				//aqui ja que sempre qeu for mudado de estado ele vai ser chamadado
+				//eu tenho que guardar em uma variavel os names que foram mudado
+				//dentro de um array para que eue possa para para o banco de dados atualizar
+				//mas como eu passo do script para ser atualizado?
+				//tenho que jogar dentro do form, dentro de um hidden
+				//eu posso criar uma variavel atraves do javascript e jogar dentro do form
+				
+			}
+
+			//$('.rg').on('change', function(){
+				//em todos os rg ele vai ser acionado
+				//aqui eu devo verificar com os dados de jogador suspenso qeu eu tenho
+				//para mostar uma sms para ver s esta apto ou nao
+
+
+				//ver quem esta sendo modificado
+				//posso fazer um for percorrendo quem foi mudado e pegar o que ? 
+				//preciso do name dele, para usar no banco de dados
+				//e comparar para ver se tem alguém que na pode ser cadastrado
+
+				
+			//});
+		
+		</script>
+	</body>
+</html>

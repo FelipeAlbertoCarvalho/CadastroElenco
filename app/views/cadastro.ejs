@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+
+		<title>Cadastro Usuario</title>
+	
+		<!-- bootstrap - link cdn -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <% if(validacao.length > 0) { %>
+        <div class="alert alert-danger">
+          <strong>Aten��o</strong>
+          <ul>
+            <% for(var i=0; i < validacao.length; i++) { %>
+              <li><%= validacao[i].msg %></li>
+            <%}%>
+          </ul>
+        </div>
+      <%}%>
+
+      <form class="form-cadastro" action="/cadastrar" method="POST">
+      
+        <div class="row">          
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="nome" class="col-form-label">Nome</label>
+              <input type="nome" value="<%=dadosForm.nome%>" class="form-control" name="nome" id="nome" placeholder="Nome">
+            </div>
+          </div>
+          
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="cpf" class="col-form-label">CPF</label>
+              <input type="text" value="<%=dadosForm.cpf%>" class="form-control cpf" name="cpf" id="cpf" placeholder="000.000.000-00">
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="data" class="col-form-label">Data de Nascimento</label>
+              <input type="date" value="<%=dadosForm.nascimento%>" class="form-control" name="nascimento" id="nascimento" >
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-4">
+            <div class="form-group">
+              <label for="email" class="col-sm-2 col-form-label">Email</label>
+              <input type="email" value="<%=dadosForm.email%>" class="form-control" name="email" id="email" placeholder="seuemail@...">
+              <small>Este email e senha será usado para fazer o login no sistema</small>
+            </div>
+          </div>
+          
+          <div class="col-xs-4">
+            <div class="form-group">
+              <label for="senha" class="col-sm-2 col-form-label">Senha</label>
+              <input type="password" value="<%=dadosForm.senha%>" class="form-control" name="senha" id="senha" placeholder="Password">
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <button type="submit" class="btn btn-primary">Confirmar cadastro</button>
+          </div>
+
+        </div>
+     
+      </form>
+
+    </div>  <!-- fim container -->
+
+
+    <script src="js/jquery-2.2.1.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+
+    <script>
+      
+     $('.cpf').mask('000.000.000-00', {reverse: false});
+     
+    </script>
+  </body>
+</html>

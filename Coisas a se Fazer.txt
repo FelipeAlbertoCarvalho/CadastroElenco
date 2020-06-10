@@ -1,0 +1,12 @@
+mudar as funcoes do onchange pra dentro do javascript
+
+acrescentar no cadastro o nome do campeonato que o time ira participar
+
+mudar o update
+	colocar em um página redirecionar para cadastro ou para atualizar os atletas
+	ter duas páginas uma de atualizar e outra de cadastrar ( talvez cadastrar atletas separado do staff do time)
+	posso colocar dai como eu coloquei no update do instagram clone $ adicionar campos e dai eu adiciono atletas
+	nome rg goleiro -> tudo dentro da mesma div
+	- acrescentar dinamicamente uma div no html
+
+exportar mongodb para excel
